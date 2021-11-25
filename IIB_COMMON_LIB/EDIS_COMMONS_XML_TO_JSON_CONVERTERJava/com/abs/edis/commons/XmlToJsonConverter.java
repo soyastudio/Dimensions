@@ -203,7 +203,7 @@ public class XmlToJsonConverter {
                     return new JsonPrimitive(Double.parseDouble(value));
             		
             	} else{
-                    return new JsonPrimitive(Integer.parseInt(value));
+                    return new JsonPrimitive(Long.parseLong(value));
             	}
             } catch (Exception e) {
                 return new JsonPrimitive(value);

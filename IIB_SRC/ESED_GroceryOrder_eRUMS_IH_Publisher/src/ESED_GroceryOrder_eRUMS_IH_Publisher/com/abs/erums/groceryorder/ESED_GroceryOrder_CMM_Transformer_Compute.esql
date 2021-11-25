@@ -3,7 +3,7 @@ BROKER SCHEMA com.abs.erums.groceryorder
 CREATE COMPUTE MODULE ESED_GroceryOrder_CMM_Transformer_Compute
 
 	-- Declare UDPs
-	DECLARE VERSION_ID EXTERNAL CHARACTER '1.14.2';
+	DECLARE VERSION_ID EXTERNAL CHARACTER '1.14.3';
 	DECLARE SYSTEM_ENVIRONMENT_CODE EXTERNAL CHARACTER 'PROD';
 	DECLARE LOG_OUPUT_MSG EXTERNAL CHARACTER 'Y';
 
@@ -1116,6 +1116,9 @@ CREATE COMPUTE MODULE ESED_GroceryOrder_CMM_Transformer_Compute
 											-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/Item/UPC/UPCNbr
 											SET UPC_.(XMLNSC.Field)Abs:UPCNbr = _fulfilled_upc.upcId;
 
+											-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/Item/UPC/UPCTxt
+											SET UPC_.(XMLNSC.Field)Abs:UPCTxt = _fulfilled_upc.upcId;
+
 										-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/Item/SystemSpecificItemId
 										SET Item_.(XMLNSC.Field)Abs:SystemSpecificItemId = _orderLine.itemId;
 
@@ -1133,7 +1136,7 @@ CREATE COMPUTE MODULE ESED_GroceryOrder_CMM_Transformer_Compute
 									SET DeliveredItem_.(XMLNSC.Field)Abs:SubstitutedItemInd = _fulfilled_upc.isSubstituted;
 
 									-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/Quantity
-									SET DeliveredItem_.(XMLNSC.Field)Abs:Quantity = _fulfilled_upc.upcQuantity;
+									SET DeliveredItem_.(XMLNSC.Field)Abs:Quantity = _orderLine.suppliedQuantity;
 
 									-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/UOM
 									DECLARE UOM_ REFERENCE TO DeliveredItem_;

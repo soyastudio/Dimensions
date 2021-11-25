@@ -1143,7 +1143,7 @@ CREATE COMPUTE MODULE ESED_GroceryOrder_CMM_Transformer_Compute
 									CREATE LASTCHILD OF DeliveredItem_ AS UOM_ TYPE XMLNSC.Folder NAME 'Abs:UOM';
 
 										-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/UOM/UOMCd
-										SET UOM_.(XMLNSC.Field)Abs:UOMCd = _fulfilled_upc.itemPrice.quantityType;
+										SET UOM_.(XMLNSC.Field)Abs:UOMCd = _orderLine.suppliedQuantityType;
 
 									-- Since v1.9.1
 									-- GetGroceryOrder/GroceryOrderData/GrocerySubOrder/GroceryOrderDetail/DeliveredItem/SellByWeightType
